@@ -1,3 +1,5 @@
+### Terraform/Provider blocks
+
 terraform {
   required_version = "1.14.3"
 }
@@ -5,6 +7,16 @@ terraform {
 provider "aws" {
   region = "us-east-2"
 }
+
+### Variables
+
+variable "server_port" {
+  description = "The port the server will use for HTTP requests"
+  type        = number
+  default     = 8080
+}
+
+### VPC and Subnets
 
 data "aws_vpc" "default" {
   default = true
@@ -17,11 +29,8 @@ data "aws_subnets" "default" {
   }
 }
 
-variable "server_port" {
-  description = "The port the server will use for HTTP requests"
-  type        = number
-  default     = 8080
-}
+
+### Launch Config & ASG
 
 resource "aws_launch_configuration" "example" {
   instance_type   = "t2.micro"
