@@ -12,13 +12,10 @@ variable "server_port" {
   default     = 8080
 }
 
-resource "aws_instance" "example" {
-  instance_type          = "t2.micro"
-  ami                    = "ami-0fb653ca2d3203ac1"
-  vpc_security_group_ids = [aws_security_group.instance.id]
-  tags = {
-    "Name" = "new-instance"
-  }
+resource "aws_launch_configuration" "example" {
+  instance_type   = "t2.micro"
+  image_id        = "ami-0fb653ca2d3203ac1"
+  security_groups = [aws_security_group.instance.id]
 
   user_data = <<-EOF
 #!/bin/bash
