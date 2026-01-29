@@ -54,6 +54,22 @@ resource "aws_lb_listener" "example" {
   }
 }
 
+resource "aws_lb_listener_rule" "asg" {
+  listener_arn = aws_lb_listener.example.arn
+  priority     = 100
+
+  condition {
+    path_pattern {
+      values = ["*"]
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.asg.arn
+  }
+}
+
 resource "aws_lb_target_group" "asg" {
   name     = "terraform-asg-example"
   port     = var.server_port
