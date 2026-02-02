@@ -1,3 +1,14 @@
+terraform {
+  required_version = "1.14.3"
+  backend "s3" {
+    bucket = "terraform-up-and-running-ch-307091e9f"
+    key    = "global/s3/terraform.tfstate"
+    region = "us-east-2"
+
+    dynamodb_table = "terraform-up-and-running-locks"
+    encrypt        = true
+  }
+}
 provider "aws" {
   region = "us-east-2"
 }
