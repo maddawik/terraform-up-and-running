@@ -1,3 +1,6 @@
+# NOTE: This can only be added after the S3
+# bucket is created.
+
 terraform {
   required_version = "1.14.3"
   backend "s3" {
