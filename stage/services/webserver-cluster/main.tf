@@ -14,6 +14,18 @@ provider "aws" {
   region = "us-east-2"
 }
 
+### Database Remote State
+
+data "terraform_remote_state" "db" {
+  backend = "s3"
+
+  config = {
+    bucket = "terraform-up-and-running-ch-307091e9f"
+    key    = "stage/data-stores/mysql/terraform.tfstate"
+    region = "us-east-2"
+  }
+}
+
 ### VPC and Subnets
 
 data "aws_vpc" "default" {
