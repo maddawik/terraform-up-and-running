@@ -1,6 +1,3 @@
-# NOTE: This can only be added after the S3
-# bucket is created.
-
 terraform {
   required_version = "1.14.3"
   backend "s3" {
@@ -41,11 +38,4 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
       sse_algorithm = "AES256"
     }
   }
-}
-
-# Outputs
-
-output "s3_bucket_arn" {
-  value       = aws_s3_bucket.terraform_state.arn
-  description = "The ARN of the S3 bucket."
 }

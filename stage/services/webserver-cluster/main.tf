@@ -1,19 +1,17 @@
-### Terraform/Provider blocks
-
 terraform {
   required_version = "1.14.3"
+  backend "s3" {
+    bucket = "terraform-up-and-running-ch-307091e9f"
+    key    = "stage/services/webserver-cluster/terraform.tfstate"
+    region = "us-east-2"
+
+    use_lockfile = true
+    encrypt      = true
+  }
 }
 
 provider "aws" {
   region = "us-east-2"
-}
-
-### Variables
-
-variable "server_port" {
-  description = "The port the server will use for HTTP requests"
-  type        = number
-  default     = 8080
 }
 
 ### VPC and Subnets
@@ -152,9 +150,4 @@ resource "aws_security_group" "instance" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-output "alb_dns_name" {
-  value       = aws_lb.example.dns_name
-  description = "The public IP address of the web server"
 }
