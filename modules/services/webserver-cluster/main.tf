@@ -33,7 +33,7 @@ data "aws_subnets" "default" {
 ### Appilcation Load Balancer + Security Group
 
 resource "aws_lb" "example" {
-  name               = "terraform-asg-example"
+  name               = "${var.cluster_name}-example"
   load_balancer_type = "application"
   subnets            = data.aws_subnets.default.ids
   security_groups    = [aws_security_group.alb.id]
@@ -143,7 +143,7 @@ resource "aws_autoscaling_group" "example" {
 
   tag {
     key                 = "Name"
-    value               = "${var.cluster_name}-asg"
+    value               = "${var.cluster_name}asg"
     propagate_at_launch = true
   }
 }
