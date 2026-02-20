@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "webserver_cluster" {
-  source                 = "../../../modules/services/webserver-cluster"
+  source                 = "github.com/maddawik/terraform-up-and-running-modules//services/webserver-cluster?ref=v0.0.1"
   cluster_name           = "terraform-example-prod"
   db_remote_state_bucket = "terraform-up-and-running-ch-307091e9f"
   db_remote_state_key    = "prod/data-stores/mysql/terraform.tfstate"
